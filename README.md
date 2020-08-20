@@ -6,11 +6,11 @@
 - [ ] 로컬 DB express 연동
 
 ### :eyes: 은아
-- [ ] DB 테이블 기반 회원 정보 sql 작성
+- [x] DB 테이블 기반 회원 정보 sql 작성
 - [ ] 회원 정보 db 연결
 
 ### :eyes: 연수
-- [ ] DB 테이블 기반 review sql 작성
+- [x] DB 테이블 기반 review sql 작성
 - [ ] review db를 기반으로 리뷰 페이지에 리스트 보여주기
 
 ### :eyes: 은수

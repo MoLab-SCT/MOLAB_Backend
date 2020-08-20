@@ -25,3 +25,9 @@
 8/13 : 각 페이지 별 필요한 db 테이블 작성 
 
 8/20 : 각 페이지 별 SQL 작성 :running:
+
+## REFERECE
+
+[MOLAB-BACKEND-실행법]() ...working on it
+
+[MOLAB 개발지](https://github.com/MoLab-SCT/MOLAB_Backend/wiki/MOLAB-%EA%B0%9C%EB%B0%9C%EC%A7%80)

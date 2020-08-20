@@ -1,9 +1,7 @@
 module.exports = {
-  DATABASE: {
-    host: "localhost",
-    port: "3306",
-    user: "root",
-    password: "root",
-    database: "MOLAB",
-  },
+  host: "localhost",
+  port: "3306",
+  username: "root",
+  password: "root",
+  database: "molab",
 };

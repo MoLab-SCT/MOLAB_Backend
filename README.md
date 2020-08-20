@@ -26,7 +26,7 @@
 
 8/20 : 각 페이지 별 SQL 작성 :running:
 
-## REFERECE
+## REFERENCE
 
 [MOLAB-BACKEND-실행법]() ...working on it
 

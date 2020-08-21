@@ -1,20 +1,20 @@
-var mysql = require('mysql');
+var mysql = require("mysql2");
 
-module.exports = function () {
-  var config = require('../db/info');
+module.exports = (function () {
+  var config = require("../db/info");
   var pool = mysql.createPool({
     host: config.host,
     user: config.user,
     password: config.password,
-    database: config.database
+    database: config.database,
   });
 
   return {
     getConnection: function (callback) {
       pool.getConnection(callback);
     },
-    end: function(callback){
+    end: function (callback) {
       pool.end(callback);
-    }
-  }
-}();
+    },
+  };
+})();

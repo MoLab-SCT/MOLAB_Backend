@@ -3,7 +3,7 @@ CREATE TABLE announces (
   an_title varchar(255) NOT NULL,
   an_startdate varchar(255) NOT NULL,
   an_enddate varchar(255) NOT NULL,
-  field` varchar(255) NOT NULL,
+  field varchar(255) NOT NULL,
   an_content varchar(255) NOT NULL,
   an_img varchar(255) DEFAULT NULL,
   createdAt datetime DEFAULT NULL,

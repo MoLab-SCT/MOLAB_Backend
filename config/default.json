@@ -1,0 +1,11 @@
+{
+  "naver": {
+    "clientID": "sWR6I9DQAv3SssMDMQTc",
+    "clientSecret": "mcBw5anqOo",
+    "callbackURL": "http://localhost:3001/login/naver/callback"
+  },
+  "kakao": {
+    "clientID": "d184edbaa5ec29e2c9419d0f6848cbd7",
+    "callbackURL": "http://localhost:3001/login/kakao/callback"
+  }
+}

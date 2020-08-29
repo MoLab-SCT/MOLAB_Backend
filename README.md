@@ -1,7 +1,7 @@
 # MOLAB_Backend
 
 ## UPDATES!
-* 로그인 기능이 추가되었습니다. addLocalLogin 브랜치를 확인해주세요!
+* 로컬 로그인 기능이 추가되었습니다. addLocalLogin 브랜치를 확인해주세요!
 
 ## CHECK LIST :heavy_check_mark:
 

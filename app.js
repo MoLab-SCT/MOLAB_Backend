@@ -19,19 +19,7 @@ app.set('view engine', 'ejs');
 app.engine('html', require('ejs').renderFile);
 //테스트로 잠시 추가!
 
-app.get('/login', (req, res) => {
-  res.render('index.html');
-});
-
-// app.get('/success', (req, res) => {
-//   console.log('성공하였는가', req.user); //passport를 사용해서 request 객체에 user를 주입
-//   res.render('success.html', { status: auth.statusUI(req, res) });
-// });
-
-app.use('/login/general_login', require('./routes/login'));
-app.use('/login/naver', require('./routes/naver'));
-app.use('/login/google', require('./routes/google'));
-app.use('/login/kakao', require('./routes/kakao'));
+app.use('/login', require('./routes/login'));
 
 app.use(logger('dev'));
 app.use(express.json());

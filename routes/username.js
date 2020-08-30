@@ -10,7 +10,7 @@ module.exports = {
     var authstatusUI = '<a href = "/">login</a>';
     if (this.isOwner(req, res)) {
       var authstatusUI =
-        `${req.user.name}` + '| <a href = "/login/success">logout</a>';
+        `${req.user.name}` + '| <a href = "/login/logout">logout</a>';
     }
     return authstatusUI;
   },

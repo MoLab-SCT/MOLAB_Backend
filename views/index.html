@@ -6,7 +6,11 @@
     <title>login page</title>
   </head>
   <body>
-    <a href="/login/general_login">일반 로그인</a>
+    <form action="/login" method="POST">
+      <p>Username : <input type="text" name="username" /></p>
+      <p>Password : <input type="password" name="password" /></p>
+      <input type="submit" value="Login" />
+    </form>
     <a href="/login/kakao">카카오로그인</a>
     <a href="/login/naver">네이버로그인</a>
     <a href="/login/google">구글로그인</a>

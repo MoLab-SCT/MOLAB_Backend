@@ -6,7 +6,8 @@
 ## CHECK LIST :heavy_check_mark:
 
 - [x] 각 페이지 별 필요한 db 테이블 작성 (8/13)
-- [ ] 로컬 DB express 연동
+- [x] 로컬 DB express 연동
+- [ ] 아마존 rds 사용
 
 ### :eyes: 은아
 - [x] DB 테이블 기반 회원 정보 sql 작성
@@ -14,7 +15,7 @@
 
 ### :eyes: 연수
 - [x] DB 테이블 기반 review sql 작성
-- [ ] review db를 기반으로 리뷰 페이지에 리스트 보여주기
+- [x] review db를 기반으로 리뷰 페이지에 리스트 보여주기
 
 ### :eyes: 은수
 - [x] DB 테이블 기반 announce sql 작성
@@ -30,6 +31,7 @@
 8/20 : 각 페이지 별 SQL 작성 
 
 8/27 : 역할 분담 및 로그인 기능 구현 진행 :running:
+
 ## REFERENCE
 
 [MOLAB-BACKEND-실행법]() ...working on it

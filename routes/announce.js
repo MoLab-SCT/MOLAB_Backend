@@ -3,6 +3,7 @@ const router = express.Router();
 const dbConnection = require("../config/connection");
 
 router.get("/", function (req, res, next) {
+  console.log(req.user);
   dbConnection((err, connection) => {
     connection.query("SELECT * FROM announces", (err, rows) => {
       connection.release();

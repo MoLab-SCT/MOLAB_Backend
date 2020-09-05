@@ -1,6 +1,7 @@
 var express = require("express");
 var router = express.Router();
 
+/* check is user loginned */
 router.get("/islogin", function (req, res, next) {
   console.log("===== isAuthenticated process =====");
   console.log(req.isAuthenticated());
@@ -11,6 +12,7 @@ router.get("/islogin", function (req, res, next) {
   }
 });
 
+/* passport logout */
 router.get("/logout", function (req, res, next) {
   console.log("===== logout =====");
   req.logout();

@@ -4,15 +4,20 @@ var createError = require("http-errors");
 var cookieParser = require("cookie-parser");
 var session = require("express-session");
 var bodyParser = require("body-parser");
+var cors = require("cors");
 var logger = require("morgan");
 var passport = require("passport");
 var indexRouter = require("./routes/index");
 var announce = require("./routes/announce");
 var review = require("./routes/review");
-var generalLogin = require("./routes/generalLogin");
+var login = require("./routes/login");
 var auth = require("./routes/auth");
 var app = express();
-
+var corsOptions = {
+  origin: "http://localhost:3001", // 허용되는 Origin
+  credentials: true,
+  optionsSuccessStatus: 200, // some legacy browsers (IE11, various SmartTVs) choke on 204
+};
 // view engine setup
 app.set("views", path.join(__dirname, "views"));
 app.set("view engine", "jade");
@@ -28,16 +33,17 @@ app.use(
 
 app.use(logger("dev"));
 app.use(express.json());
-// app.use(express.urlencoded({ extended: false }));
+app.use(express.urlencoded({ extended: false }));
 app.use(passport.initialize());
 app.use(passport.session());
+app.use(cors(corsOptions));
 
 app.use("/", indexRouter);
 app.use("/announce", announce);
 app.use("/review", review);
-app.use("/login/general_login", generalLogin);
+app.use("/api/login", login);
+app.use("/login", login);
 app.use("/auth", auth);
-// app.use("/auth/logout", auth);
 
 // error handler
 app.use(function (err, req, res, next) {

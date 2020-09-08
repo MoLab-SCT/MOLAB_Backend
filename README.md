@@ -1,9 +1,5 @@
 # MOLAB_Backend
 
-## UPDATES!
-
-* 로컬 로그인 기능이 추가되었습니다. addLocalLogin 브랜치를 확인해주세요!
-
 ## CHECK LIST :heavy_check_mark:
 
 - [x] 각 페이지 별 필요한 db 테이블 작성 (8/13)
@@ -35,7 +31,9 @@
 8/20 : 각 페이지 별 SQL 작성 
 
 
-8/27 : 역할 분담 및 로그인 기능 구현 진행 :running:
+8/27 : 역할 분담 및 로그인 기능 구현 진행
+
+9/3 : 예시 콘텐츠 준비, 소통 & 공고 페이지 제작 진행 :running:
 
 ## REFERENCE
 

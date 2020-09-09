@@ -21,4 +21,14 @@ router.get("/logout", function (req, res, next) {
   });
 });
 
+router.get("/getUser", function (req, res, next) {
+  console.log("===== get user info =====");
+  if (req.isAuthenticated()) {
+    console.log(req.user);
+    res.send(req.user);
+  } else {
+    console.log("can not find user!");
+  }
+});
+
 module.exports = router;

@@ -1,13 +1,34 @@
 const express = require("express");
 const router = express.Router();
+const path = require("path");
+var multer = require("multer");
 const dbConnection = require("../config/connection");
 
+/* AWS S3 버킷 사용 */
+const _storage = multer.diskStorage({
+  destination: function (req, file, cb) {
+    if (
+      file.mimetype == "image/jpeg" ||
+      file.mimetype == "image/jpg" ||
+      file.mimetype == "image/png"
+    ) {
+      cb(null, "./public/upload/img");
+    } else if (
+      file.mimetype == "application/pdf" ||
+      file.mimetype == "application/txt" ||
+      file.mimetype == "application/octet-stream"
+    ) {
+      cb(null, "./public/upload/text");
+    }
+  },
+});
+
+const upload = multer({ storage: _storage });
+
 router.get("/", function (req, res, next) {
-  console.log(req.user);
   dbConnection((err, connection) => {
     connection.query("SELECT * FROM communications", (err, rows) => {
       connection.release();
-      console.log(rows);
       if (err) {
         throw err;
       }
@@ -16,7 +37,7 @@ router.get("/", function (req, res, next) {
   });
 });
 
-router.post("/register_project", function (req, res, next) {
+router.post("/register_project", upload.single("file"), function (req, res) {
   let {
     com_name,
     com_date,
@@ -26,10 +47,12 @@ router.post("/register_project", function (req, res, next) {
     com_category,
     recommend_num,
     comment_num,
-  } = req.body.projectForm;
+  } = JSON.parse(req.body.projectForm);
+
+  let fileSrc = req.file.path;
 
   let query =
-    "INSERT INTO communications (com_name,com_date,com_title,com_simpleInfo,com_detailInfo, com_category, recommend_num, comment_num) VALUES(?,?,?,?,?,?,?,?)";
+    "INSERT INTO communications (com_name, com_date, com_title, com_simpleInfo, com_detailInfo, com_category, recommend_num, comment_num, file_src) VALUES(?,?,?,?,?,?,?,?,?)";
 
   var param = [
     com_name,
@@ -40,6 +63,7 @@ router.post("/register_project", function (req, res, next) {
     com_category,
     recommend_num,
     comment_num,
+    fileSrc,
   ];
 
   dbConnection((err, connection) => {

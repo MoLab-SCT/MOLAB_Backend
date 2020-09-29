@@ -4,6 +4,7 @@ var db = mysql.createConnection({
   user: 'root',
   password: 'euna',
   database: 'MOLAB',
+  dateStrings: 'date',
 });
 
 db.connect();

@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title><%= title %></title>
+</head>
+<body>
+    <h1><%= title %></h1>
+    <table border="1">
+        <tr>
+            <td>번호</td>
+            <td>제목</td>
+            <td>마감일</td>
+        </tr>
+        <%
+        for(let i=0;i <rows.length; i++)
+        {
+            let data = rows[i];
+        %>
+        <tr>
+            <td><%=data.an_no%></td>
+            <td><a href="/announce/detail/<%=data.an_no%>"><%=data.an_title%></a></td>
+            <td><%=data.an_enddate%></td>
+        </tr>
+
+        <%}%>
+    </table>
+</body>
+</html>

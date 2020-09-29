@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title><%= title %></title>
+  </head>
+  <body>
+    <h1><%= title %></h1>
+    <table border="1">
+      <tr>
+        <td>번호</td>
+        <td><%=row.no%></td>
+      </tr>
+      <tr>
+        <td>제목</td>
+        <td><%=row.title%></td>
+      </tr>
+
+      <tr>
+        <td>시작일</td>
+        <td><%=row.startdate%></td>
+      </tr>
+      <tr>
+        <td>마감일</td>
+        <td><%=row.enddate%></td>
+      </tr>
+      <tr>
+        <td>결과발표일</td>
+        <td><%=row.resultdate%></td>
+      </tr>
+      <tr>
+        <td>분야</td>
+        <td><%=row.field_thumbnail%></td>
+      </tr>
+      <tr>
+        <td>개요</td>
+        <td><%=row.description%></td>
+      </tr>
+      <tr>
+        <td>이미지</td>
+        <td><img src="<%=row.img%>" width="300px" height="500px" /></td>
+      </tr>
+      <tr>
+        <td>활동 내용</td>
+        <td><%=row.field_detail%></td>
+      </tr>
+      <tr>
+        <td>자격</td>
+        <td><%=row.qualification%></td>
+      </tr>
+      <tr>
+        <td>모집인원</td>
+        <td><%=row.recruitment_number%></td>
+      </tr>
+      <tr>
+        <td>신청방법</td>
+        <td><%=row.apply%></td>
+      </tr>
+      <tr>
+        <td>참여혜택</td>
+        <td><%=row.benefits%></td>
+      </tr>
+      <tr>
+        <td>문의사항</td>
+        <td><%=row.questions%></td>
+      </tr>
+    </table>
+  </body>
+</html>

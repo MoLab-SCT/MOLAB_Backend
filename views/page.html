@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title><%= title %></title>
+  </head>
+  <body>
+    <h1><%= title %></h1>
+    <table border="1">
+      <tr>
+        <td>번호</td>
+        <td>제목</td>
+        <td>기간</td>
+        <td>사진</td>
+      </tr>
+      <% for(let i = (page * page_num) - page_num; i < (page * page_num); i++) {
+      if(i > length){ i++; } else{ let data = rows[i] %>
+      <tr>
+        <td><%= i + 1 %></td>
+        <td>
+          <a href="/announce/detail/<%=data.no%>"><%= data.title %></a>
+        </td>
+        <td><%- data.startdate %>~<%- data.enddate %></td>
+        <td><img src="<%=data.img%>" width="100px" height="100px" /></td>
+      </tr>
+      <% } } %>
+      <tr>
+        <td colspan="6">
+          <% for(let j = 0; j < rows.length / page_num; j++){ %> [<a
+            href="/announce/page/<%= j + 1 %>"
+            ><%= j + 1 %></a
+          >] <% } %>
+        </td>
+      </tr>
+    </table>
+  </body>
+</html>

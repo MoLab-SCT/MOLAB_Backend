@@ -14,12 +14,15 @@ var app = express();
 // app.set("view engine", "jade");
 
 //테스트로 잠시 추가!
-app.set('views', __dirname + '/views');
+app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
 app.engine('html', require('ejs').renderFile);
 //테스트로 잠시 추가!
 
 app.use('/login', require('./routes/login'));
+
+//announce router
+app.use('/announce', require('./routes/announce_test'));
 
 app.use(logger('dev'));
 app.use(express.json());

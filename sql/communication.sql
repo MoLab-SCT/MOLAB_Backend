@@ -7,8 +7,6 @@ CREATE TABLE communications (
   com_simpleInfo varchar(255) NOT NULL,
   com_detailInfo longtext  NOT NULL,
   com_category varchar(45) NOT NULL,
-  recommend_num bigint(20),
-  comment_num bigint(20),
   PRIMARY KEY (com_no)
 ) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8
 

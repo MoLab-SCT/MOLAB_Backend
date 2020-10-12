@@ -132,30 +132,11 @@ function likeList(com_no, res) {
         var json = JSON.stringify(rows);
         var userinfo = JSON.parse(json);
         var likeLength = userinfo.length;
-        updateLikeNum(com_no,likeLength);
         return res.send(userinfo);
       }
     );
   });
 }
-
-
-function updateLikeNum(com_no, recommend_num) {
-  let query = "UPDATE communications SET recommend_num=? WHERE com_no=?";
-  dbConnection((err, connection) => {
-    connection.query(query, [recommend_num,com_no],
-      (err, rows) => {
-        connection.release();
-        if (err) {
-          throw err;
-        }
-        console.log("===== update recommend_num in communication table =====");
-        return true;
-      }
-    );
-  });
-}
-
 
 router.post("/project/get_like", function (req, res) {
   let { com_no } = req.body;

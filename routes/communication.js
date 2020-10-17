@@ -46,9 +46,7 @@ router.post("/register_project", upload.single("file"), function (req, res) {
     com_simpleInfo,
     com_detailInfo,
     com_category,
-    recommend_num,
-    comment_num,
-  } = JSON.parse(req.body.projectForm);
+  } = req.body.projectForm;
 
   let fileSrc = "";
 
@@ -57,7 +55,7 @@ router.post("/register_project", upload.single("file"), function (req, res) {
   }
 
   let query =
-    "INSERT INTO communications (com_name, com_date, com_title, com_simpleInfo, com_detailInfo, com_category, recommend_num, comment_num, file_src) VALUES(?,?,?,?,?,?,?,?,?)";
+    "INSERT INTO communications (com_name, com_date, com_title, com_simpleInfo, com_detailInfo, com_category, file_src) VALUES(?,?,?,?,?,?,?)";
 
   var param = [
     com_name,
@@ -66,8 +64,6 @@ router.post("/register_project", upload.single("file"), function (req, res) {
     com_simpleInfo,
     com_detailInfo,
     com_category,
-    recommend_num,
-    comment_num,
     fileSrc,
   ];
 

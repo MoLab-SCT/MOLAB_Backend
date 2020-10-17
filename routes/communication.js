@@ -38,7 +38,8 @@ router.get("/", function (req, res, next) {
   });
 });
 
-router.post("/register_project", upload.single("file"), function (req, res) {
+router.post("/register_project",upload.single("file"), function (req, res) {
+
   let {
     com_name,
     com_date,
@@ -46,16 +47,20 @@ router.post("/register_project", upload.single("file"), function (req, res) {
     com_simpleInfo,
     com_detailInfo,
     com_category,
-  } = req.body.projectForm;
+  } = JSON.parse(req.body.projectForm);
 
   let fileSrc = "";
+  let fileName = "";
 
-  if (req.file) {
+  if(req.file){
     fileSrc = req.file.path;
+    fileName= req.file.filename;
   }
 
+  console.log("fileName" + req.file.filename);
+
   let query =
-    "INSERT INTO communications (com_name, com_date, com_title, com_simpleInfo, com_detailInfo, com_category, file_src) VALUES(?,?,?,?,?,?,?)";
+    "INSERT INTO communications (com_name, com_date, com_title, com_simpleInfo, com_detailInfo, com_category, file_src, file_name) VALUES(?,?,?,?,?,?,?,?)";
 
   var param = [
     com_name,
@@ -65,6 +70,7 @@ router.post("/register_project", upload.single("file"), function (req, res) {
     com_detailInfo,
     com_category,
     fileSrc,
+    fileName
   ];
 
   dbConnection((err, connection) => {

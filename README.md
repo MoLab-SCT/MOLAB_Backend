@@ -15,7 +15,7 @@
 - [x] DB 테이블 기반 review sql 작성
 - [x] review db를 기반으로 리뷰 페이지에 리스트 보여주기
 - [x] 콘텐츠 준비 (이슈 참고)
-- [ ] 소개 static 페이지 제작
+- [X] 소개 static 페이지 제작
 
 ### :eyes: 은수
 - [x] DB 테이블 기반 announce sql 작성

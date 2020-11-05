@@ -7,6 +7,27 @@ var passport = require("passport"),
 const dbConnection = require("../config/connection");
 const config = require("../config/default.json");
 
+const RSA = require("node-rsa");
+const fs = require("fs");
+const rsa = new RSA();
+var rsaPublic = fs.readFileSync(__dirname + "/../public/rsa/public_key.pem");
+var rsaPrivate = fs.readFileSync(__dirname + "/../public/rsa/private.key");
+
+rsa.importKey(rsaPrivate, "private");
+const privateKey = rsa.exportKey("private");
+rsa.importKey(rsaPublic, "public");
+const publicKey = rsa.exportKey("public");
+
+router.get("/",function(req,res,next){
+  if (Object.keys(req.query).length === 0) {
+    try {
+      res.send(publicKey);
+    } catch(e) {
+      console.log(e);
+    }
+  }
+});
+
 passport.serializeUser(function (user, done) {
   console.log("===== serializeUser ======");
   console.log(user);
@@ -138,9 +159,11 @@ router.post("/general_login", function (req, res, next) {
 
 passport.use(
   new LocalStrategy(
-    { usernameField: "id", passwordField: "pwd", session: true },
+    { usernameField: "id", passwordField: "encPw", session: true },
     function (username, password, done) {
       console.log("===== localStrategy process =====");
+      password = rsa.decrypt(password,"utf-8");
+      console.log(password);
       dbConnection((err, connection) => {
         connection.query(
           "SELECT * FROM USER WHERE ID=? AND PASSWORD=?",

@@ -57,8 +57,6 @@ router.post("/register_project",upload.single("file"), function (req, res) {
     fileName= req.file.filename;
   }
 
-  console.log("fileName" + req.file.filename);
-
   let query =
     "INSERT INTO communications (com_name, com_date, com_title, com_simpleInfo, com_detailInfo, com_category, file_src, file_name) VALUES(?,?,?,?,?,?,?,?)";
 
@@ -121,6 +119,7 @@ router.post("/project/get_comment", function (req, res) {
   });
 });
 
+/* send updated like list to front-end */
 function likeList(com_no, res) {
   dbConnection((err, connection) => {
     connection.query(
@@ -148,29 +147,43 @@ router.post("/project/get_like", function (req, res) {
 router.post("/project/click_like", function (req, res) {
   let { com_no, loginId, likeStatus } = req.body;
 
-  const likeEvent = (query, param, com_no) => {
+  /* handle like event from front-end : update com_like table*/
+  const likeEvent = (query1,query2, param1, param2, com_no) => {
+
     dbConnection((err, connection) => {
-      connection.query(query, param, (err, rows) => {
+
+      connection.query(query2, param2, (err, rows) => {
+        connection.release();
+        if (err) {
+          throw err;
+        }
+        console.log("===== handle click event from communication table =====");
+      });
+      
+      connection.query(query1, param1, (err, rows) => {
         connection.release();
         if (err) {
           throw err;
         }
         console.log("===== handle click event from com_like table =====");
-        console.log(param);
+        console.log(param1);
         likeList(com_no, res);
       });
     });
   };
 
   if (likeStatus) {
-    let query = "DELETE FROM com_like WHERE com_no = ? AND username = ?";
-    let param = [com_no, loginId];
-    likeEvent(query, param, com_no);
+    let query1 = "DELETE FROM com_like WHERE com_no = ? AND username = ?";
+    let query2 = "UPDATE communications SET com_like = com_like - 1 WHERE com_no =?";
+    let param1 = [com_no, loginId];
+    let param2 = [com_no];
+    likeEvent(query1, query2, param1, param2, com_no);
   } else {
-    let query = "INSERT INTO com_like (com_no, username) VALUES(?,?)";
-    let param = [com_no, loginId];
-    likeEvent(query, param, com_no);
-  }
+    let query1 = "INSERT INTO com_like (com_no, username) VALUES(?,?)";
+    let query2 = "UPDATE communications SET com_like = com_like + 1 WHERE com_no =?";
+    let param1 = [com_no, loginId];
+    let param2 = [com_no];
+    likeEvent(query1, query2, param1, param2, com_no);  }
 });
 
 module.exports = router;

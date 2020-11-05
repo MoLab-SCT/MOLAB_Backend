@@ -12,6 +12,7 @@ var announce = require("./routes/announce");
 var review = require("./routes/review");
 var communication = require("./routes/communication");
 var login = require("./routes/login");
+var signup = require("./routes/signup");
 var auth = require("./routes/auth");
 var app = express();
 var corsOptions = {
@@ -46,6 +47,7 @@ app.use("/api/communication", communication);
 app.use("/api/login", login);
 app.use("/login", login);
 app.use("/api/auth", auth);
+app.use("/api/signup", signup);
 app.use("/auth", auth);
 
 // error handler

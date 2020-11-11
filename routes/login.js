@@ -18,11 +18,11 @@ const privateKey = rsa.exportKey("private");
 rsa.importKey(rsaPublic, "public");
 const publicKey = rsa.exportKey("public");
 
-router.get("/",function(req,res,next){
+router.get("/", function (req, res, next) {
   if (Object.keys(req.query).length === 0) {
     try {
       res.send(publicKey);
-    } catch(e) {
+    } catch (e) {
       console.log(e);
     }
   }
@@ -162,7 +162,7 @@ passport.use(
     { usernameField: "id", passwordField: "encPw", session: true },
     function (username, password, done) {
       console.log("===== localStrategy process =====");
-      password = rsa.decrypt(password,"utf-8");
+      password = rsa.decrypt(password, "utf-8");
       console.log(password);
       dbConnection((err, connection) => {
         connection.query(

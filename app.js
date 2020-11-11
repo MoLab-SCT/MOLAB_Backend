@@ -41,7 +41,7 @@ app.use(passport.session());
 app.use(cors(corsOptions));
 
 app.use("/", indexRouter);
-app.use("/announce", announce);
+app.use("/api/announce", announce);
 app.use("/review", review);
 app.use("/api/communication", communication);
 app.use("/api/login", login);

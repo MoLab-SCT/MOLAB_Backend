@@ -1,14 +1,14 @@
-var express = require("express");
+var express = require('express');
 var router = express.Router();
-var passport = require("passport"),
-  LocalStrategy = require("passport-local").Strategy,
-  NaverStrategy = require("passport-naver").Strategy,
-  KakaoStrategy = require("passport-kakao").Strategy;
-const dbConnection = require("../config/connection");
-const config = require("../config/default.json");
+var passport = require('passport'),
+  LocalStrategy = require('passport-local').Strategy,
+  NaverStrategy = require('passport-naver').Strategy,
+  KakaoStrategy = require('passport-kakao').Strategy;
+const dbConnection = require('../config/connection');
+const config = require('../config/default.json');
 
 passport.serializeUser(function (user, done) {
-  console.log("===== serializeUser ======");
+  console.log('===== serializeUser ======');
   console.log(user);
   if (user.id) {
     done(null, user.id);
@@ -19,20 +19,20 @@ passport.serializeUser(function (user, done) {
 
 passport.deserializeUser(function (user, done) {
   if (user.provider) {
-    console.log("===== deserializeUser ======");
+    console.log('===== deserializeUser ======');
     console.log(user);
     done(null, user);
   } else {
     let userinfo;
     dbConnection((err, connection) => {
       var id = user;
-      connection.query("SELECT * FROM USER WHERE ID=?", [id], (err, result) => {
+      connection.query('SELECT * FROM USER WHERE ID=?', [id], (err, result) => {
         connection.release();
         if (err) {
-          console.log("mysql query send error");
+          console.log('mysql query send error');
           throw err;
         } else {
-          console.log("===== deserializeUser ======");
+          console.log('===== deserializeUser ======');
           console.log(result);
           var json = JSON.stringify(result[0]);
           userinfo = JSON.parse(json);
@@ -43,10 +43,10 @@ passport.deserializeUser(function (user, done) {
   }
 });
 
-router.get("/kakao", passport.authenticate("login-kakao"));
+router.get('/kakao', passport.authenticate('login-kakao'));
 
 passport.use(
-  "login-kakao",
+  'login-kakao',
   new KakaoStrategy(
     {
       clientID: config.kakao.clientID,
@@ -56,9 +56,9 @@ passport.use(
       var user = {
         name: profile.username,
         email: profile._json.kakao_account.email,
-        provider: "kakao",
+        provider: 'kakao',
       };
-      console.log("==kakao_user==");
+      console.log('==kakao_user==');
       console.log(user);
       return done(null, user);
     }
@@ -66,17 +66,17 @@ passport.use(
 );
 
 router.get(
-  "/kakao/callback",
-  passport.authenticate("login-kakao", {
-    successRedirect: "/login/success",
-    failureRedirect: "/login",
+  '/kakao/callback',
+  passport.authenticate('login-kakao', {
+    successRedirect: '/login/success',
+    failureRedirect: '/login',
   })
 );
 
-router.get("/naver", passport.authenticate("naver"));
+router.get('/naver', passport.authenticate('naver'));
 
 passport.use(
-  "naver",
+  'naver',
   new NaverStrategy(
     {
       clientID: config.naver.clientID,
@@ -88,10 +88,10 @@ passport.use(
         name: profile.displayName,
         email: profile.emails[0].value,
         username: profile.displayName,
-        provider: "naver",
+        provider: 'naver',
         naver: profile._json,
       };
-      console.log("==naver_user==");
+      console.log('==naver_user==');
       console.log(user);
       return done(null, user);
     }
@@ -99,10 +99,10 @@ passport.use(
 );
 
 router.get(
-  "/naver/callback",
-  passport.authenticate("naver", {
-    successRedirect: "/login/success",
-    failureRedirect: "/login",
+  '/naver/callback',
+  passport.authenticate('naver', {
+    successRedirect: '/login/success',
+    failureRedirect: '/login',
   })
 );
 
@@ -110,22 +110,22 @@ const authenticateUser = (req, res, next) => {
   if (req.isAuthenticated()) {
     next();
   } else {
-    res.status(301).redirect("/login");
+    res.status(301).redirect('/login');
   }
 };
 
-router.get("/success", authenticateUser, (req, res) => {
-  return res.redirect("http://localhost:3000");
+router.get('/success', authenticateUser, (req, res) => {
+  return res.redirect('http://localhost:3000');
 });
 
 /* for local login */
-router.post("/general_login", function (req, res, next) {
-  passport.authenticate("local", (err, user, info) => {
+router.post('/general_login', function (req, res, next) {
+  passport.authenticate('local', (err, user, info) => {
     if (err) {
       next(err);
     }
     if (!user) {
-      return res.redirect("/");
+      return res.redirect('/');
     }
     req.logIn(user, (err) => {
       if (err) {
@@ -138,27 +138,27 @@ router.post("/general_login", function (req, res, next) {
 
 passport.use(
   new LocalStrategy(
-    { usernameField: "id", passwordField: "pwd", session: true },
+    { usernameField: 'id', passwordField: 'pwd', session: true },
     function (username, password, done) {
-      console.log("===== localStrategy process =====");
+      console.log('===== localStrategy process =====');
       dbConnection((err, connection) => {
         connection.query(
-          "SELECT * FROM USER WHERE ID=? AND PASSWORD=?",
+          'SELECT * FROM USER WHERE ID=? AND PASSWORD=?',
           [username, password],
           (err, result) => {
             connection.release();
             console.log(result);
             if (err) {
-              console.log("mysql query send error");
+              console.log('mysql query send error');
               throw err;
             }
             if (result.length === 0) {
-              console.log("no matched result");
-              return done(null, false, { message: "Incorrect" });
+              console.log('no matched result');
+              return done(null, false, { message: 'Incorrect' });
             } else {
               var json = JSON.stringify(result[0]);
               var userinfo = JSON.parse(json);
-              console.log("===== successfully find result =====");
+              console.log('===== successfully find result =====');
               console.log(userinfo);
               return done(null, userinfo);
             }

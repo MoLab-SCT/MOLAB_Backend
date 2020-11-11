@@ -1,62 +1,62 @@
-var express = require("express");
-var path = require("path");
-var createError = require("http-errors");
-var cookieParser = require("cookie-parser");
-var session = require("express-session");
-var bodyParser = require("body-parser");
-var cors = require("cors");
-var logger = require("morgan");
-var passport = require("passport");
-var indexRouter = require("./routes/index");
-var announce = require("./routes/announce");
-var review = require("./routes/review");
-var communication = require("./routes/communication");
-var login = require("./routes/login");
-var auth = require("./routes/auth");
+var express = require('express');
+var path = require('path');
+var createError = require('http-errors');
+var cookieParser = require('cookie-parser');
+var session = require('express-session');
+var bodyParser = require('body-parser');
+var cors = require('cors');
+var logger = require('morgan');
+var passport = require('passport');
+var indexRouter = require('./routes/index');
+var announce = require('./routes/announce');
+var review = require('./routes/review');
+var communication = require('./routes/communication');
+var login = require('./routes/login');
+var auth = require('./routes/auth');
 var app = express();
 var corsOptions = {
-  origin: "http://localhost:3001", // 허용되는 Origin
+  origin: 'http://localhost:3001', // 허용되는 Origin
   credentials: true,
   optionsSuccessStatus: 200, // some legacy browsers (IE11, various SmartTVs) choke on 204
 };
 // view engine setup
-app.set("views", path.join(__dirname, "views"));
-app.set("view engine", "jade");
+app.set('views', path.join(__dirname, 'views'));
+app.set('view engine', 'jade');
 
-app.use(express.static(path.join(__dirname, "public")));
+app.use(express.static(path.join(__dirname, 'public')));
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 app.use(cookieParser());
-app.use(cookieParser("keyboard cat"));
+app.use(cookieParser('keyboard cat'));
 app.use(
-  session({ secret: "keyboard cat", resave: true, saveUninitialized: false })
+  session({ secret: 'keyboard cat', resave: true, saveUninitialized: false })
 );
 
-app.use(logger("dev"));
+app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(passport.initialize());
 app.use(passport.session());
 app.use(cors(corsOptions));
 
-app.use("/", indexRouter);
-app.use("/announce", announce);
-app.use("/review", review);
-app.use("/api/communication", communication);
-app.use("/api/login", login);
-app.use("/login", login);
-app.use("/api/auth", auth);
-app.use("/auth", auth);
+app.use('/', indexRouter);
+app.use('/api/announce', announce);
+app.use('/review', review);
+app.use('/api/communication', communication);
+app.use('/api/login', login);
+app.use('/login', login);
+app.use('/api/auth', auth);
+app.use('/auth', auth);
 
 // error handler
 app.use(function (err, req, res, next) {
   // set locals, only providing error in development
   res.locals.message = err.message;
-  res.locals.error = req.app.get("env") === "development" ? err : {};
+  res.locals.error = req.app.get('env') === 'development' ? err : {};
 
   // render the error page
   res.status(err.status || 500);
-  res.render("error");
+  res.render('error');
 });
 
 // catch 404 and forward to error handler

@@ -146,7 +146,7 @@ router.post("/general_login", function (req, res, next) {
       next(err);
     }
     if (!user) {
-      return res.redirect("/");
+      return res.json(false);
     }
     req.logIn(user, (err) => {
       if (err) {

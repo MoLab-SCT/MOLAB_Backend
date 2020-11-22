@@ -29,8 +29,9 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 app.use(cookieParser());
 app.use(cookieParser("keyboard cat"));
+app.enable('trust proxy'); 
 app.use(
-  session({ secret: "keyboard cat", resave: true, saveUninitialized: false })
+  session({ secret: "keyboard cat", resave: true, proxy: true, saveUninitialized: false })
 );
 
 app.use(logger("dev"));

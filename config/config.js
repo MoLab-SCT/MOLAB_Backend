@@ -1,4 +1,4 @@
-module.exports = {
+module.exports ={
   host: "us-cdbr-east-02.cleardb.com",
   port: "3306",
   user: "b5ea85694c788f",

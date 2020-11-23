@@ -34,7 +34,7 @@ router.post("/", function (req, res, next) {
             }
             if (result.length === 0) {
               console.log("no matched result");
-              res.send("false");
+              res.send(false);
             } else {
               var json = JSON.stringify(result[0]);
               var userinfo = JSON.parse(json);

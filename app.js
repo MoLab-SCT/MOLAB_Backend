@@ -17,7 +17,7 @@ var signup = require("./routes/signup");
 var auth = require("./routes/auth");
 var app = express();
 var corsOptions = {
-  origin: "https://5fbba772bd6bc9bd60b14a5c--molab.netlify.app", // 허용되는 Origin
+  origin: "https://5fbbab5ebd6bc9c114b148d2--molab.netlify.app", // 허용되는 Origin
   credentials: true,
   optionsSuccessStatus: 200, // some legacy browsers (IE11, various SmartTVs) choke on 204
 };
@@ -30,7 +30,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 app.use(cookieParser());
 app.use(cookieParser("keyboard cat"));
-app.enable('trust proxy'); 
+app.enable('trust proxy');
 app.use(
   session({ secret: "keyboard cat", resave: true, proxy: true, saveUninitialized: false })
 );

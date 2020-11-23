@@ -3,10 +3,10 @@ const router = express.Router();
 const dbConnection = require("../config/connection");
 
 router.get("/", function (req, res) {
-  let sql = "select * from announce";
   dbConnection((err, connection) => {
-    connection.query(sql, (err, rows) => {
+    connection.query("SELECT * FROM announce", (err, rows) => {
       connection.release();
+      console.log(rows);
       if (err) {
         throw err;
       }

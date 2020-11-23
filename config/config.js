@@ -5,3 +5,10 @@ module.exports = {
   password: "b9bb6744",
   database: "heroku_cef972af551034b",
 };
+
+// module.exports = {
+//   host: 'localhost',
+//   user: 'root',
+//   password: 'root',
+//   database: 'MOLAB',
+// }

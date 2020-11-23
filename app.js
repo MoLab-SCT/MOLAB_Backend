@@ -12,11 +12,12 @@ var announce = require("./routes/announce");
 var review = require("./routes/review");
 var communication = require("./routes/communication");
 var login = require("./routes/login");
+var generalLogin = require("./routes/generalLogin");
 var signup = require("./routes/signup");
 var auth = require("./routes/auth");
 var app = express();
 var corsOptions = {
-  origin: "https://5fb8166fceb3710c77c2ee7a--molab.netlify.app", // 허용되는 Origin
+  origin: "https://5fbb97296307b89fc0704d36--molab.netlify.app", // 허용되는 Origin
   credentials: true,
   optionsSuccessStatus: 200, // some legacy browsers (IE11, various SmartTVs) choke on 204
 };
@@ -29,8 +30,9 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 app.use(cookieParser());
 app.use(cookieParser("keyboard cat"));
+app.enable('trust proxy');
 app.use(
-  session({ secret: "keyboard cat", resave: true, saveUninitialized: false })
+  session({ secret: "keyboard cat", resave: true, proxy: true, saveUninitialized: false })
 );
 
 app.use(logger("dev"));
@@ -49,6 +51,7 @@ app.use("/login", login);
 app.use("/api/auth", auth);
 app.use("/api/signup", signup);
 app.use("/auth", auth);
+app.use("/api/another_login",generalLogin);
 
 // error handler
 app.use(function (err, req, res, next) {

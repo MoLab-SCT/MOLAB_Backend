@@ -1,34 +1,39 @@
 var express = require("express");
 var router = express.Router();
+var jwtFun = require("../config/jwt");
+const dbConnection = require("../config/connection");
 
-/* check is user loginned */
-router.get("/islogin", function (req, res, next) {
-  console.log("===== isAuthenticated process =====");
-  console.log(req.isAuthenticated());
-  if (req.user) {
-    res.send(true);
-  } else {
-    res.send(false);
-  }
-});
 
 /* passport logout */
-router.get("/logout", function (req, res, next) {
-  console.log("===== logout =====");
-  req.logout();
-  req.session.save(function () {
-    res.send(true);
-  });
-});
+// router.get("/logout", function (req, res, next) {
+//   console.log("===== logout =====");
+//   req.logout();
+//   req.session.save(function () {
+//     res.send(true);
+//   });
+// });
 
-router.get("/getUser", function (req, res, next) {
+router.post("/getuser", function (req, res, next) {
+  let { token } = req.body;
   console.log("===== get user info =====");
-  if (req.isAuthenticated()) {
-    console.log(req.user);
-    res.send(req.user);
-  } else {
-    console.log("can not find user!");
-  }
+  jwtFun.decryption(token, (err, value) => {
+    if (err) {
+      console.log(err);
+      next();
+    } else {
+      dbConnection((err, connection) => {
+        let query = "SELECT id,name FROM USER WHERE ID=?";
+        connection.query(query, value.id , (err, rows) => {
+          connection.release();
+          if (err) {
+            throw err;
+          }
+          console.log(rows);
+          return res.send(rows);
+        });
+      });
+    }
+  });    
 });
 
 module.exports = router;

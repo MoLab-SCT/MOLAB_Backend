@@ -30,11 +30,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 app.use(cookieParser());
 app.use(cookieParser("keyboard cat"));
-<<<<<<< HEAD
-app.enable('trust proxy');
-=======
 app.enable('trust proxy'); 
->>>>>>> cbf8e5a6e12c1af022673c33d834ce3a266d84f1
 app.use(
   session({ secret: "keyboard cat", resave: true, proxy: true, saveUninitialized: false })
 );

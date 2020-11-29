@@ -18,7 +18,7 @@ var auth = require("./routes/auth");
 var app = express();
 //origin: "https://5fbbab5ebd6bc9c114b148d2--molab.netlify.app"
 var corsOptions = {
-  origin: "https://5fbe025fe902cf8cdd44ffc0--molab.netlify.app", // 허용되는 Origin
+  origin: "https://5fc37daf33d9445e328b57a6--molab.netlify.app", // 허용되는 Origin
   credentials: true,
   optionsSuccessStatus: 200, // some legacy browsers (IE11, various SmartTVs) choke on 204
 };
